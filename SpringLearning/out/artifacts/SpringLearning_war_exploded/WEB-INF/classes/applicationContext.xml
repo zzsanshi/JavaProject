@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="UserDao" class="LearningCode0901.dao.impl.UserDaoImp1"></bean>
+
+<!--    目标对象-->
+    <bean id="Target" class="LearningCode0926.aop.Target"></bean>
+<!--        切面-->
+    <bean id="myAspect" class="LearningCode0926.aop.MyAspect"></bean>
+<!--   配置织入,告诉spring哪些方法(切点)需要进行哪些增强(前置/后置) -->
+<aop:config>
+<!--    声名切面-->
+    <aop:aspect ref="myAspect">
+<!--        切点+通知-->
+        <aop:before method="before" pointcut="execution(public void LearningCode0926.aop.Target.save())"/>
+    </aop:aspect>
+</aop:config>
+</beans>
