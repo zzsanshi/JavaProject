@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration >
+    <typeHandlers>
+        <typeHandler handler="Learning.handler.DateTypeHandler"/>
+    </typeHandlers>
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="sqlite"/>
+        </plugin>
+    </plugins>
+<!--    数据源环境-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="org.sqlite.JDBC" />
+                <property name="url" value="jdbc:sqlite:D:\\Database\\username.db" />
+<!--                <property name="username" value="${jdbc.username}" />-->
+<!--                <property name="password" value="${jdbc.password}" />-->
+            </dataSource>
+        </environment>
+    </environments>
+<!--    加载映射文件-->
+    <mappers>
+<!--        <mapper resource="mapper\\UserMapper.xml"></mapper>-->
+<!--        <mapper resource="mapper\\UserMapper2.xml"/>-->
+<!--        <mapper resource="mapper\\UserMapper3.xml"/>-->
+<!--        注解开发-->
+<!--        指定接口所在的包-->
+        <package name="Learning.mapper"/>
+    </mappers>
+
+</configuration>
