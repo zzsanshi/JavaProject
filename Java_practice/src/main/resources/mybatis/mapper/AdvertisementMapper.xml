@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javaclimb.mapper.AdvertisementMapper">
+    <select id="getList" parameterType="advertisement" resultType="advertisement">
+        select a.*,g.name as goodsName from advertisement a
+        left join goods g on g.id=g.goodsId
+        <where>
+            <if test="state>0">
+                a.state = # {state }
+            </if>
+            <if test="id != null and id!=''">
+                and a.id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and a.name like '%${name}%'
+            </if>
+
+
+        </where>
+    </select>
+
+    <insert id="add" parameterType="advertisement">
+        insert into advertisement_Type(name) value (#{name})
+    </insert>
+
+    <update id="update" parameterType="advertisement">
+        update advertisement_type set name=#{name} where id=#{id}
+    </update>
+</mapper>
+

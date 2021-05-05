@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javaclimb.mapper.OrdersMapper">
+    <select id="getList" parameterType="Orders" resultType="Orders">
+        select g.*,t.name as typeName from Orders od
+
+        <where>
+            <if test="state>0">
+                state = # {state }
+            </if>
+            <if test="id != null and id!=''">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name like '%${name}%'
+            </if>
+            <if test="writer != null and writer != ''">
+                and writer like '%${writer}%'
+            </if>
+
+        </where>
+    </select>
+
+    <insert id="add" parameterType="Orders">
+        insert into goods_Type(name) value (#{name})
+    </insert>
+
+    <update id="update" parameterType="Orders">
+        update goods_type set name=#{name} where id=#{id}
+    </update>
+</mapper>
+
